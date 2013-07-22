@@ -28,9 +28,8 @@
     <CodeAnalysisFailOnMissingRules>false</CodeAnalysisFailOnMissingRules>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="EntityFramework, Version=4.4.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\EntityFramework.5.0.0\lib\net40\EntityFramework.dll</HintPath>
+    <Reference Include="EntityFramework">
+      <HintPath>..\Sc2TutsBase\packages\EntityFramework.5.0.0\lib\net40\EntityFramework.dll</HintPath>
     </Reference>
     <Reference Include="ICSharpCode.SharpZipLib">
       <HintPath>dll\ICSharpCode.SharpZipLib.dll</HintPath>
@@ -39,9 +38,9 @@
       <HintPath>dll\Interop.ShockwaveFlashObjects.dll</HintPath>
       <EmbedInteropTypes>True</EmbedInteropTypes>
     </Reference>
-    <Reference Include="log4net, Version=1.2.11.0, Culture=neutral, PublicKeyToken=669e0ddf0bb1aa2a, processorArchitecture=MSIL">
+    <Reference Include="log4net, Version=1.2.10.0, Culture=neutral, PublicKeyToken=1b44e1d426115821, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\log4net.2.0.0\lib\net40-full\log4net.dll</HintPath>
+      <HintPath>..\Sc2TutsBase\packages\log4net.2.0.0\lib\net40-full\log4net.dll</HintPath>
     </Reference>
     <Reference Include="Recaptcha">
       <HintPath>dll\Recaptcha.dll</HintPath>
@@ -76,8 +75,8 @@
     <Compile Include="Asp.net MVC\Extensions\Pager.cs" />
     <Compile Include="Asp.net MVC\Filters\PageInfoFilter.cs" />
     <Compile Include="Asp.net MVC\Models\IMessageViewModel.cs" />
-    <Compile Include="CustomConfigSections\LogConfiguration.cs" />
-    <Compile Include="CustomConfigSections\TagConfiguration.cs" />
+    <Compile Include="Asp.net MVC\CustomConfigSections\LogConfiguration.cs" />
+    <Compile Include="Asp.net MVC\CustomConfigSections\TagConfiguration.cs" />
     <Compile Include="EntityFramework\DbEntityValidationConcat.cs" />
     <Compile Include="Helpers\XPathHelper.cs" />
     <Compile Include="Log\EventViewerLog.cs" />
@@ -120,12 +119,13 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Asp.net MVC\EditorTemplates\HowTo.txt" />
-    <Content Include="Asp.net MVC\Filters\FiltersNotIncludedInProject_checkHiddens.txt" />
+    <Content Include="Asp.net MVC\Filters\ReadMe_FiltersNotIncludedInProject_checkHiddens.txt" />
     <Content Include="Asp.net MVC\Models\ModelsNotIncludedInProject_checkHiddens.txt" />
     <Content Include="base64Image.txt" />
     <Content Include="JS\_Common.js" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="App.config" />
     <None Include="ConnecVpn\rac\Logins_RAPPWis02.txt - Raccourci.lnk" />
     <None Include="ConnecVpn\rac\vpnDisconnect.bat - Raccourci.lnk" />
     <None Include="ConnecVpn\rac\vpnRuniso.bat - Raccourci.lnk" />

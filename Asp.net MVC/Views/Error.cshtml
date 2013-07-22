@@ -1,0 +1,25 @@
+﻿@model HandleErrorInfo
+@{
+    ViewBag.Title = "Error";
+}
+
+@if (Request.IsLocal || HttpContext.Current.IsDebuggingEnabled)
+{
+	if (@Model != null && @Model.Exception != null)
+	{<section>
+		<div class="thanks">
+			<h1>An error occured</h1>
+			<p title="@Model.Exception.StackTrace">@Model.Exception.Message</p>	
+		</div>
+	</section>
+						
+	}
+}
+else
+{	
+	<section>
+		<div class="thanks">
+			<h1>An error occured</h1>
+		</div>
+	</section>
+}
