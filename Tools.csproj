@@ -72,6 +72,7 @@
     <Compile Include="Asp.net MVC\Attributes\RequiredToBeTrue.cs" />
     <Compile Include="Asp.net MVC\Attributes\ZipCodeValidationAttribute.cs" />
     <Compile Include="Asp.net MVC\Extensions\Pager.cs" />
+    <Compile Include="Asp.net MVC\Filters\LogExceptionFilter.cs" />
     <Compile Include="Asp.net MVC\Filters\PageInfoFilter.cs" />
     <Compile Include="Asp.net MVC\Models\IMessageViewModel.cs" />
     <Compile Include="Asp.net MVC\CustomConfigSections\LogConfiguration.cs" />

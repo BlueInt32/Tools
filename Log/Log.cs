@@ -194,7 +194,7 @@ namespace Tools
 					System.Diagnostics.Debug.WriteLine(string.Format(" -- {0} -- {1}", DateTime.UtcNow, processedText));
 					break;
 					case LogMethod.FileAppend:
-					FileHelper.TextAppendToFile("Tools.Log", ConfigurationManager.AppSettings["logFilePath"], string.Format("{0} - {1}\n\n", DateTime.Now, processedText));
+					FileHelper.TextAppendToFile(ConfigurationManager.AppSettings["logFilePath"], string.Format("{0} - {1}\n\n", DateTime.Now, processedText));
 					return;
 					break;
 					case LogMethod.EventViewer:
