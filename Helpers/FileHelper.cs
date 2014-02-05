@@ -19,7 +19,7 @@ namespace Tools
 					sr.Flush();
 				}
 		}
-		public static void TextAppendToFile(string operationDescription, string pathAndName, string content)
+		public static void TextAppendToFile(string pathAndName, string content)
 		{
 			using (StreamWriter sr = new StreamWriter(pathAndName, true, Encoding.UTF8))
 			{
