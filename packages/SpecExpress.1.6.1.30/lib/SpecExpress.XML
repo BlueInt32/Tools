@@ -1,0 +1,1385 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>SpecExpress</name>
+    </assembly>
+    <members>
+        <member name="P:SpecExpress.RuleTree.NodeBase.ChildNode">
+            <summary>
+            Reference to a RuleNode
+            </summary>
+        </member>
+        <member name="P:SpecExpress.RuleTree.NodeBase.ChildHasAndRelationship">
+            <summary>
+            True if the child has an And relationship with the current node
+            </summary>
+        </member>
+        <member name="M:SpecExpress.Rules.RuleValidator`2.GetExpressionValue(SpecExpress.CompiledExpression,SpecExpress.Rules.RuleValidatorContext{`0,`1})">
+            <summary>
+            Executes a Delegate and casts to the return value to the appropriate type
+            </summary>
+            <param name="expression"></param>
+            <param name="context"></param>
+            <returns></returns>
+        </member>
+        <member name="M:SpecExpress.Rules.RuleValidator`2.GetExpressionValue(System.String,SpecExpress.Rules.RuleValidatorContext{`0,`1})">
+            <summary>
+            Defaults to first PropertyExpression
+            </summary>
+            <param name="key"></param>
+            <param name="context"></param>
+            <returns></returns>
+        </member>
+        <member name="T:SpecExpress.Rules.RuleValidatorContext`2">
+            <summary>
+            Retrieves the name and value of the Property given an Expression
+            </summary>
+            <typeparam name="T"></typeparam>
+            <typeparam name="TProperty"></typeparam>
+        </member>
+        <member name="T:SpecExpress.DSL.WithBuilder`2">
+            <summary>
+            Facilitates the ability to stipulate additional options for the prior rule.
+            </summary>
+            <typeparam name="T">Type of entity being validated.</typeparam>
+            <typeparam name="TProperty">Type of property on the entity being validated.</typeparam>
+        </member>
+        <member name="M:SpecExpress.DSL.WithBuilder`2.#ctor(SpecExpress.PropertyValidator{`0,`1})">
+            <summary>
+            Initializes a new instance of <see cref="T:SpecExpress.DSL.WithBuilder`2"/>
+            </summary>
+            <param name="propertyValidator">The <see cref="T:SpecExpress.PropertyValidator`2"/> that is being build by the DSL.</param>
+        </member>
+        <member name="P:SpecExpress.DSL.WithBuilder`2.Message">
+            <summary>
+            Specifies an override to the default error message if the rule fails.
+            </summary>
+        </member>
+        <member name="P:SpecExpress.DSL.WithBuilder`2.MessageKey">
+            <summary>
+            Specifies a key to be used to look up the error message from the MessageStore.
+            </summary>
+        </member>
+        <!-- Badly formed XML comment ignored for member "P:SpecExpress.DSL.WithBuilder`2.FormatProperty" -->
+        <member name="T:SpecExpress.CompiledExpression">
+            <summary>
+            Contains a LambdaExpression that has been compiled. 
+            This is to optimize performance by guaranteeing that the expression gets compiled only once.
+            </summary>
+        </member>
+        <member name="T:SpecExpress.CompiledFunctionExpression`2">
+            <summary>
+            A Generic implementation of CompiledExpression
+            </summary>
+            <typeparam name="T"></typeparam>
+            <typeparam name="TResult"></typeparam>
+        </member>
+        <member name="M:SpecExpress.Rules.GeneralValidators.SpecificationRule`2.#ctor(SpecExpress.Validates{`1})">
+            <summary>
+            Validate using designated specification
+            </summary>
+            <param name="specificationBase"></param>
+        </member>
+        <member name="M:SpecExpress.Rules.GeneralValidators.SpecificationRule`2.#ctor">
+            <summary>
+            Validation Property with default Specification from Registry
+            </summary>
+        </member>
+        <member name="M:SpecExpress.Util.TypeExtensions.CanBeCastTo(System.Type,System.Type)">
+            <summary>
+            Determines if the pluggedType can be upcast to the pluginType
+            </summary>
+            <param name="pluginType"></param>
+            <param name="pluggedType"></param>
+            <returns></returns>
+        </member>
+        <member name="M:SpecExpress.Util.StringExtensions.ToReverseString(System.Collections.Generic.List{System.String})">
+            <summary>
+            Takes a list of string, reverses them, and appends them together in a string
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="M:SpecExpress.MessageStore.ResourceMessageStore.#ctor(System.Resources.ResourceManager)">
+            <summary>
+            Create ResourceMessageStore with specified Resource File
+            </summary>
+            <param name="resourceManager"></param>
+        </member>
+        <member name="M:SpecExpress.MessageStore.ResourceMessageStore.#ctor">
+            <summary>
+            Created ResourceMessageStore with Default Resource File
+            </summary>
+        </member>
+        <member name="T:SpecExpress.Validates`1">
+            <summary>
+            The base class used to define a specification for a given type.
+            </summary>
+            <remarks>
+            This type should be inherited from when defining a specification for type T.
+            </remarks>
+            <example>
+            public class CustomerSpecification : Validates&lt;Customer&gt;
+            {
+                public CustomerSpecification
+                {
+                    Check(c => c.Name).Required().MaxLength(100);
+                }
+            }
+            </example>
+            <typeparam name="T">The type to validate.</typeparam>
+        </member>
+        <member name="M:SpecExpress.Validates`1.Check``1(System.Linq.Expressions.Expression{System.Func{`0,``0}},System.String)">
+            <summary>
+            Defines a set of rules for a property of T as expressed in the expression parameter.  The name of the property
+            specified in the propertyNameOverride property.  The set of rules will be enforced in order for the specification
+            to be valid.
+            </summary>
+            <typeparam name="T">The type of entity being validated.</typeparam>
+            <typeparam name="TProperty">The type of the property being validated.</typeparam>
+            <param name="expression">Lambda expression returning the property to evaluate (i.e. "c =&gt; c.FirstName").</param>
+            <param name="propertyNameOverride">Name of property to use in resulting error messages.</param>
+            <returns><see cref="T:SpecExpress.DSL.ActionOptionConditionBuilder`2"/></returns>
+        </member>
+        <member name="M:SpecExpress.Validates`1.Check``1(System.Linq.Expressions.Expression{System.Func{`0,``0}},System.Func{`0,System.String})">
+            <summary>
+            Defines a set of rules for a property of T as expressed in the expression parameter. The name of the property
+            specified by a <see cref="!:Func&lt;T,string&gt;"/> passed in to the propertyNameOverride property.  The set of 
+            rules will be enforced in order for the specification to be valid.
+            </summary>
+            <typeparam name="T">The type of entity being validated.</typeparam>
+            <typeparam name="TProperty">The type of the property being validated.</typeparam>
+            <param name="expression">Lambda expression returning the property to evaluate (i.e. "c =&gt; c.FirstName").</param>
+            <param name="propertyNameOverride">A <see cref="!:Func&lt;T,string&gt;"/> that results in the name of the property 
+            to use in resulting error messages</param>
+            <returns><see cref="T:SpecExpress.DSL.ActionOptionConditionBuilder`2"/></returns>
+        </member>
+        <member name="M:SpecExpress.Validates`1.Check``1(System.Linq.Expressions.Expression{System.Func{`0,``0}})">
+            <summary>
+            Defines a set of rules for a property of T as expressed in the expression parameter. The set of rules will be 
+            enforced in order for the specification to be valid.
+            </summary>
+            <typeparam name="T">The type of entity being validated.</typeparam>
+            <typeparam name="TProperty">The type of the property being validated.</typeparam>
+            <param name="expression">Lambda expression returning the property to evaluate (i.e. "c =&gt; c.FirstName").</param>
+            <returns><see cref="T:SpecExpress.DSL.ActionOptionConditionBuilder`2"/></returns>
+        </member>
+        <member name="M:SpecExpress.Validates`1.Warn``1(System.Linq.Expressions.Expression{System.Func{`0,``0}},System.String)">
+            <summary>
+            Defines a set of rules for a property of T as expressed in the expression parameter.  The name of the property
+            specified in the propertyNameOverride property.  The results of the rules will be treated as warnings and will
+            not make the specification invalid.
+            </summary>
+            <typeparam name="T">The type of entity being validated.</typeparam>
+            <typeparam name="TProperty">The type of the property being validated.</typeparam>
+            <param name="expression">Lambda expression returning the property to evaluate (i.e. "c =&gt; c.FirstName").</param>
+            <param name="propertyNameOverride">Name of property to use in resulting error messages.</param>
+            <returns><see cref="T:SpecExpress.DSL.ActionOptionConditionBuilder`2"/></returns>
+        </member>
+        <member name="M:SpecExpress.Validates`1.Warn``1(System.Linq.Expressions.Expression{System.Func{`0,``0}})">
+            <summary>
+            Defines a set of rules for a property of T as expressed in the expression parameter.  The name of the property
+            specified in the propertyNameOverride property.  The results of the rules will be treated as warnings and will
+            not make the specification invalid.
+            </summary>
+            <typeparam name="T">The type of entity being validated.</typeparam>
+            <typeparam name="TProperty">The type of the property being validated.</typeparam>
+            <param name="expression">Lambda expression returning the property to evaluate (i.e. "c =&gt; c.FirstName").</param>
+            <returns><see cref="T:SpecExpress.DSL.ActionOptionConditionBuilder`2"/></returns>
+        </member>
+        <member name="M:SpecExpress.Validates`1.Using``2">
+            <summary>
+            Ensures that when validating an instance of T, that another specification also be enforced.
+            </summary>
+            <typeparam name="U">The type of the object the specification to enforce is validating.</typeparam>
+            <typeparam name="TSpecType">The type of the specification to enforce.</typeparam>
+        </member>
+        <member name="M:SpecExpress.Validates`1.Validate(`0)">
+            <summary>
+            Validates an instance of T against the rules defined in the specification.
+            </summary>
+            <param name="instance">Instance of T to validate.</param>
+            <returns><see cref="T:SpecExpress.ValidationNotification"/></returns>
+        </member>
+        <member name="M:SpecExpress.Validates`1.Validate(`0,SpecExpress.SpecificationContainer)">
+            <summary>
+            Validates an instance of T against the rules defined in the specification and a SpecificationContainer.
+            </summary>
+            <remarks>
+            This is useful when using a specification leverages other specifications for referenced types.  The referenced
+            types will be validated against their specifications contained in the SpecificationContainer.
+            </remarks>
+            <param name="instance">Instance of T to validate.</param>
+            <param name="specificationContainer">The <see cref="T:SpecExpress.SpecificationContainer"/></param>
+            <returns><see cref="T:SpecExpress.ValidationNotification"/></returns>
+        </member>
+        <member name="P:SpecExpress.Validates`1.ForType">
+            <summary>
+            Returns the type T that is being validated.
+            </summary>
+            <remarks>
+            This property will search the class hierarchy for the class inheriting Validates&lt;T&gt; and return the type of T.
+            </remarks>
+        </member>
+        <member name="T:SpecExpress.DSL.IRuleBuilder`2">
+            <summary>
+            Interface for a RuleBuilder.  The DSL may be extended by defining Extension methods to this interface
+            to define Rules to enforce for a given property.
+            </summary>
+            <typeparam name="T">Type of entity being validated.</typeparam>
+            <typeparam name="TProperty">Type of property on the entity being validated.</typeparam>
+        </member>
+        <member name="M:SpecExpress.DSL.IRuleBuilder`2.RegisterValidator(SpecExpress.Rules.RuleValidator{`0,`1})">
+            <summary>
+            Facilitates Registering a RuleValidator
+            </summary>
+            <param name="validator"><see cref="T:SpecExpress.Rules.RuleValidator`2"/></param>
+            <returns><see cref="T:SpecExpress.DSL.IRuleBuilder`2"/></returns>
+        </member>
+        <member name="P:SpecExpress.DSL.IRuleBuilder`2.JoinBuilder">
+            <summary>
+            Gets a JoinBuilder
+            </summary>
+        </member>
+        <member name="T:SpecExpress.DSL.RuleBuilder`2">
+            <summary>
+            Facilitates the expression of an individual Rule to apply to a property.
+            </summary>
+            <typeparam name="T">Type of entity being validated.</typeparam>
+            <typeparam name="TProperty">Type of property on the entity being validated.</typeparam>
+        </member>
+        <member name="M:SpecExpress.DSL.RuleBuilder`2.#ctor(SpecExpress.PropertyValidator{`0,`1})">
+            <summary>
+            Initializes a new instance of <see cref="T:SpecExpress.DSL.RuleBuilder`2"/>
+            </summary>
+            <param name="propertyValidator">The <see cref="T:SpecExpress.PropertyValidator`2"/> that is being build by the DSL.</param>
+        </member>
+        <member name="M:SpecExpress.DSL.RuleBuilder`2.SpecExpress#DSL#IRuleBuilder{T@TProperty}#RegisterValidator(SpecExpress.Rules.RuleValidator{`0,`1})">
+            <summary>
+            Facilitates Registering a RuleValidator on the PropertyValidator
+            </summary>
+            <param name="validator"><see cref="T:SpecExpress.Rules.RuleValidator`2"/></param>
+            <returns><see cref="T:SpecExpress.DSL.IRuleBuilder`2"/></returns>
+        </member>
+        <member name="M:SpecExpress.DSL.RuleBuilder`2.Specification">
+            <summary>
+            Sets Specification used to validate this Property to the Default
+            </summary>
+            <returns><see cref="T:SpecExpress.DSL.IAndOr`2"/></returns>
+        </member>
+        <member name="M:SpecExpress.DSL.RuleBuilder`2.Specification``1">
+            <summary>
+            Sets Specification used to validate this Property to the Default
+            </summary>
+            <returns><see cref="T:SpecExpress.DSL.IAndOr`2"/></returns>
+        </member>
+        <member name="M:SpecExpress.DSL.RuleBuilder`2.Specification(System.Action{SpecExpress.Validates{`1}})">
+            <summary>
+            Sets Specification used to validate this Property to the Default
+            </summary>
+            <returns><see cref="T:SpecExpress.DSL.IAndOr`2"/></returns>
+        </member>
+        <!-- Badly formed XML comment ignored for member "M:SpecExpress.DSL.RuleBuilder`2.ForEachSpecification``1(System.Action{SpecExpress.Validates{``0}},System.String)" -->
+        <!-- Badly formed XML comment ignored for member "M:SpecExpress.DSL.RuleBuilder`2.ForEachSpecification``1(System.Action{SpecExpress.Validates{``0}})" -->
+        <member name="M:SpecExpress.DSL.RuleBuilder`2.ForEachSpecification``2(System.String)">
+            <summary>
+            Allows the enforcement of a specific specification to be applied to each item in a collection.
+            </summary>
+            <example>
+            Check(cust =&gt; cust.ContactCollection).Required()
+                .ForEachSpecification&lt;Contact, ContactSpecification&gt;("Contacts");
+            </example>
+            <param name="itemName">Tne name the property to use when a notification is generated.</param>
+            <typeparam name="TCollectionType">The type of instances contained in the collection.</typeparam>
+            <typeparam name="TCollectionSpecType">The Specification type to apply to each item in the collection.</typeparam>
+            <returns><see cref="T:SpecExpress.DSL.IAndOr`2"/></returns>
+        </member>
+        <member name="M:SpecExpress.DSL.RuleBuilder`2.ForEachSpecification``2">
+            <summary>
+            Allows the enforcement of a specific specification to be applied to each item in a collection.
+            </summary>
+            <example>
+            Check(cust =&gt; cust.Contacts).Required()
+                .ForEachSpecification&lt;Contact, ContactSpecification&gt;(); 
+            </example>
+            <typeparam name="TCollectionType">The type of instances contained in the collection.</typeparam>
+            <typeparam name="TCollectionSpecType">The Specification type to apply to each item in the collection.</typeparam>
+            <returns><see cref="T:SpecExpress.DSL.IAndOr`2"/></returns>
+        </member>
+        <member name="M:SpecExpress.DSL.RuleBuilder`2.ForEachSpecification``1">
+            <summary>
+            Allows the enforcement of the default specification to be applied to each item in a collection.
+            </summary>
+            <example>
+            Check(cust =&gt; cust.Contacts).Required()
+                .ForEachSpecification&lt;Contact&gt;(); 
+            </example>
+            <typeparam name="TCollectionType">The type of instances contained in the collection.</typeparam>
+            <returns><see cref="T:SpecExpress.DSL.IAndOr`2"/></returns>
+        </member>
+        <member name="M:SpecExpress.DSL.RuleBuilder`2.Group(System.Action{SpecExpress.DSL.RuleBuilder{`0,`1}})">
+            <summary>
+            Facilitates the grouping of a subset of rules to dictate precidence for And / Or opertations.
+            </summary>
+            <example>
+               Validate ActiveDate is in a five day window starting 10 days ago OR a five day window starting in 5 days from now.
+               spec.Check(c =&gt; c.ActiveDate).Required()
+                   .Group(d =&gt; d.GreaterThan(DateTime.Now.AddDays(-10))
+                                   .And.LessThan(DateTime.Now.AddDays(-5)))
+                   .Or
+                   .Group(d =&gt; d.GreaterThan(DateTime.Now.AddDays(5))
+                                   .And.LessThan(DateTime.Now.AddDays(10)));
+            </example>
+            <param name="rules"><see cref="!:Action&lt;RuleBuilder&lt;T, TProperty&gt;&gt;"/></param>
+            <returns><see cref="T:SpecExpress.DSL.IAndOr`2"/></returns>
+        </member>
+        <member name="P:SpecExpress.DSL.RuleBuilder`2.Not">
+            <summary>
+            Negates the current Rule being built.
+            </summary>
+            <example>
+            Check(c => c.ActiveDate).Required().Not.LessThan(DateTime.Now);
+            </example>
+        </member>
+        <member name="P:SpecExpress.DSL.RuleBuilder`2.SpecExpress#DSL#IRuleBuilder{T@TProperty}#JoinBuilder">
+            <summary>
+            Gets a JoinBuilder
+            </summary>
+        </member>
+        <member name="T:SpecExpress.DSL.ActionJoinBuilder`2">
+            <summary>
+            Provides the ability to transition from a Rule definition to a WithBuilder and to
+            define "And / Or" relations to other rules.
+            </summary>
+            <typeparam name="T">Type of entity being validated.</typeparam>
+            <typeparam name="TProperty">Type of property on the entity being validated.</typeparam>
+        </member>
+        <member name="M:SpecExpress.DSL.ActionJoinBuilder`2.#ctor(SpecExpress.PropertyValidator{`0,`1})">
+            <summary>
+            Initializes a new instance of a <see cref="T:SpecExpress.DSL.ActionJoinBuilder`2"/>
+            </summary>
+            <param name="propertyValidator">
+            The <see cref="T:SpecExpress.PropertyValidator`2"/> that is to be built.
+             </param>
+        </member>
+        <member name="M:SpecExpress.DSL.ActionJoinBuilder`2.With(System.Action{SpecExpress.DSL.WithBuilder{`0,`1}})">
+            <summary>
+            Supply additional options for the prior rule.
+            </summary>
+            <param name="w"><see cref="!:Action&lt;WithBuilder&lt;T,TProperty&gt;&gt;"/></param>
+            <returns></returns>
+        </member>
+        <member name="P:SpecExpress.DSL.ActionJoinBuilder`2.And">
+            <summary>
+            Define an And relation between two Rules
+            </summary>
+        </member>
+        <member name="P:SpecExpress.DSL.ActionJoinBuilder`2.Or">
+            <summary>
+            Define an Or relation between two Rules
+            </summary>
+        </member>
+        <member name="T:SpecExpress.DSL.ActionOptionBuilder`2">
+            <summary>
+            Facilitates the requirement rule on a given property - "Required" or "Optional"
+            </summary>
+            <typeparam name="T">Type of entity being validated.</typeparam>
+            <typeparam name="TProperty">Type of property on the entity being validated.</typeparam>
+        </member>
+        <member name="M:SpecExpress.DSL.ActionOptionBuilder`2.#ctor(SpecExpress.PropertyValidator{`0,`1})">
+            <summary>
+            Initializes a new instance of <see cref="T:SpecExpress.DSL.ActionOptionBuilder`2"/>
+            </summary>
+            <param name="propertyValidator">The <see cref="T:SpecExpress.PropertyValidator`2"/> that is being build by the DSL.</param>
+        </member>
+        <member name="M:SpecExpress.DSL.ActionOptionBuilder`2.Required">
+            <summary>
+            Mark property as required, creating a ValidationResult if this property has no value. 
+            Additional rules will only be evaluated if this rule is valid.
+            </summary>
+            <returns><see cref="T:SpecExpress.DSL.WithRuleBuilder`2"/></returns>
+        </member>
+        <member name="M:SpecExpress.DSL.ActionOptionBuilder`2.Required(System.String)">
+            <summary>
+            Mark property as required, creating a ValidationResult if this property has no value.
+            Additional rules will only be evaluated if this rule is valid.
+            </summary>
+            <param name="errorMessage">Custom error message if property fails the Required rule</param>
+            <returns><see cref="T:SpecExpress.DSL.WithRuleBuilder`2"/></returns>
+        </member>
+        <member name="M:SpecExpress.DSL.ActionOptionBuilder`2.Optional">
+            <summary>
+            Mark property as optional. If a value of the property is specified, additional rules will be enforced,
+            otherwise additional rules will be ignored.
+            </summary>
+            <returns><see cref="T:SpecExpress.DSL.WithRuleBuilder`2"/></returns>
+        </member>
+        <member name="M:SpecExpress.PropertyValidator`2.OrRule(SpecExpress.Rules.RuleValidator)">
+            <summary>
+            Add the RuleValidator to the RuleTree using an Or condition
+            </summary>
+            <param name="ruleValidator"><see cref="T:SpecExpress.Rules.RuleValidator"/></param>
+        </member>
+        <member name="M:SpecExpress.PropertyValidator`2.ConditionalOrRule(SpecExpress.Rules.RuleValidator)">
+            <summary>
+            Add the RuleValidator to the RuleTree using an OrElse condition
+            where the ruleValidator is evaluated only if the prior rules in the tree
+            evaluate to false.
+            </summary>
+            <param name="ruleValidator"><see cref="T:SpecExpress.Rules.RuleValidator"/></param>
+        </member>
+        <member name="M:SpecExpress.PropertyValidator`2.OrRule(SpecExpress.Rules.RuleValidator{`0,`1})">
+            <summary>
+            Add the RuleValidator to the RuleTree using an Or condition
+            </summary>
+            <param name="validator"><see cref="T:SpecExpress.Rules.RuleValidator`2"/></param>
+        </member>
+        <member name="M:SpecExpress.PropertyValidator`2.ConditionalOrRule(SpecExpress.Rules.RuleValidator{`0,`1})">
+            <summary>
+            Add the RuleValidator to the RuleTree using an OrElse condition
+            where the ruleValidator is evaluated only if the prior rules in the tree
+            evaluate to false.
+            </summary>
+            <param name="validator"><see cref="T:SpecExpress.Rules.RuleValidator`2"/></param>
+        </member>
+        <member name="M:SpecExpress.PropertyValidator`2.OrGroup(SpecExpress.PropertyValidator{`0,`1})">
+            <summary>
+            Add the RuleTree defined in innerPropertyValidator to the RuleTree as a group
+            using an OrElse condition 
+            </summary>
+            <param name="innerPropertyValidator"><see cref="T:SpecExpress.PropertyValidator`2"/></param>
+        </member>
+        <member name="M:SpecExpress.PropertyValidator`2.ConditionalOrGroup(SpecExpress.PropertyValidator{`0,`1})">
+            <summary>
+            Add the RuleTree defined in innerPropertyValidator to the RuleTree as a group
+            using an Or condition where the ruleValidator is evaluated only if the
+            prior rules in the tree evaluate to false.
+            </summary>
+            <param name="innerPropertyValidator"><see cref="T:SpecExpress.PropertyValidator`2"/></param>
+        </member>
+        <member name="M:SpecExpress.PropertyValidator`2.AndRule(SpecExpress.Rules.RuleValidator)">
+            <summary>
+            Add the RuleValidator to the RuleTree using an And condition
+            </summary>
+            <param name="ruleValidator"><see cref="T:SpecExpress.Rules.RuleValidator"/></param>
+        </member>
+        <member name="M:SpecExpress.PropertyValidator`2.ConditionalAndRule(SpecExpress.Rules.RuleValidator)">
+            <summary>
+            Add the RuleValidator to the RuleTree using an AndAlso condition
+            where the ruleValidator will only be evaluated if the prior rules
+            in the tree evaluate to true.
+            </summary>
+            <param name="ruleValidator"><see cref="T:SpecExpress.Rules.RuleValidator"/></param>
+        </member>
+        <member name="M:SpecExpress.PropertyValidator`2.AndRule(SpecExpress.Rules.RuleValidator{`0,`1})">
+            <summary>
+            Add the RuleValidator to the RuleTree using an And condition
+            </summary>
+            <param name="ruleValidator"><see cref="T:SpecExpress.Rules.RuleValidator"/></param>
+        </member>
+        <member name="M:SpecExpress.PropertyValidator`2.ConditionalAndRule(SpecExpress.Rules.RuleValidator{`0,`1})">
+            <summary>
+            Add the RuleValidator to the RuleTree using an AndAlso condition
+            where the ruleValidator will only be evaluated if the prior rules
+            in the tree evaluate to true.
+            </summary>
+            <param name="ruleValidator"><see cref="T:SpecExpress.Rules.RuleValidator"/></param>
+        </member>
+        <member name="M:SpecExpress.PropertyValidator`2.AndGroup(SpecExpress.PropertyValidator{`0,`1})">
+            <summary>
+            Add the RuleTree defined in innerPropertyValidator to the RuleTree as a group
+            using an And condition where the ruleValidator will only be evaluated if 
+            the prior rules in the tree evaluate to true.
+            </summary>
+            <param name="innerPropertyValidator"><see cref="T:SpecExpress.PropertyValidator`2"/></param>
+        </member>
+        <member name="M:SpecExpress.PropertyValidator`2.ConditionalAndGroup(SpecExpress.PropertyValidator{`0,`1})">
+            <summary>
+            Add the RuleTree defined in innerPropertyValidator to the RuleTree as a group
+            using an AndAlso condition
+            </summary>
+            <param name="innerPropertyValidator"><see cref="T:SpecExpress.PropertyValidator`2"/></param>
+        </member>
+        <member name="T:SpecExpress.RuleTree.RuleTree">
+            <summary>
+            Tree structure that describes RuleValidators and their relations to one another (i.e. And / Or)
+            </summary>
+        </member>
+        <member name="T:SpecExpress.RuleTree.RuleTree`2">
+            <summary>
+            Tree structure that describes RuleValidators and their relations to one another (i.e. And / Or)
+            </summary>
+        </member>
+        <member name="T:SpecExpress.CoreValidatorExtensions">
+            <summary>
+            Changed return from RuleBuilder to ActionJoin so displays AND/WITH after a Rule.
+            </summary>
+        </member>
+        <member name="M:SpecExpress.CoreValidatorExtensions.IsInFuture``1(SpecExpress.DSL.IRuleBuilder{``0,System.DateTime})">
+            <summary>
+            Enforces that a DateTime is in the future.
+            </summary>
+            <typeparam name="T">Type that Specification is being defined for.</typeparam>
+            <param name="expression">Instance of <see cref="T:SpecExpress.DSL.IRuleBuilder`2"/> that is this method is extending.</param>
+            <returns><see cref="T:SpecExpress.DSL.ActionJoinBuilder`2"/></returns>
+        </member>
+        <member name="M:SpecExpress.CoreValidatorExtensions.IsInFuture``1(SpecExpress.DSL.IRuleBuilder{``0,System.Nullable{System.DateTime}})">
+            <summary>
+            Enforces that a Nullable DateTime is in the future.
+            </summary>
+            <typeparam name="T">Type that Specification is being defined for.</typeparam>
+            <param name="expression">Instance of <see cref="!:IRuleBuilder&lt;T, System.Nullable&lt;DateTime&gt;&gt;&gt;"/> that is this method is extending.</param>
+            <returns><see cref="!:ActionJoinBuilder&lt;T, System.Nullable&lt;DateTime&gt;&gt;"/></returns>
+        </member>
+        <member name="M:SpecExpress.CoreValidatorExtensions.IsInPast``1(SpecExpress.DSL.IRuleBuilder{``0,System.DateTime})">
+            <summary>
+            Enforces that a DateTime is in the past.
+            </summary>
+            <typeparam name="T">Type that Specification is being defined for.</typeparam>
+            <param name="expression">Instance of <see cref="T:SpecExpress.DSL.IRuleBuilder`2"/> that is this method is extending.</param>
+            <returns><see cref="T:SpecExpress.DSL.ActionJoinBuilder`2"/></returns>
+        </member>
+        <member name="M:SpecExpress.CoreValidatorExtensions.IsInPast``1(SpecExpress.DSL.IRuleBuilder{``0,System.Nullable{System.DateTime}})">
+            <summary>
+            Enforces that a Nullable DateTime is in the past.
+            </summary>
+            <typeparam name="T">Type that Specification is being defined for.</typeparam>
+            <param name="expression">Instance of <see cref="!:IRuleBuilder&lt;T, System.Nullable&lt;DateTime&gt;&gt;&gt;"/> that is this method is extending.</param>
+            <returns><see cref="!:ActionJoinBuilder&lt;T, System.Nullable&lt;DateTime&gt;&gt;"/></returns>
+        </member>
+        <member name="M:SpecExpress.CoreValidatorExtensions.LengthBetween``1(SpecExpress.DSL.IRuleBuilder{``0,System.String},System.Int32,System.Int32)">
+            <summary>
+            Enforces that a string's length is between a min and max length.
+            </summary>
+            <typeparam name="T">Type that Specification is being defined for.</typeparam>
+            <param name="expression">Instance of <see cref="!:IRuleBuilder&lt;T, string&gt;"/> that is this method is extending.</param>
+            <param name="min">Minimum length of the string.</param>
+            <param name="max">Maximum length of the string.</param>
+            <returns><see cref="!:ActionJoinBuilder&lt;T, string&gt;"/></returns>
+        </member>
+        <member name="M:SpecExpress.CoreValidatorExtensions.LengthBetween``1(SpecExpress.DSL.IRuleBuilder{``0,System.String},System.Linq.Expressions.Expression{System.Func{``0,System.Int32}},System.Int32)">
+            <summary>
+            Enforces that a string's length is between a min and max length.
+            </summary>
+            <typeparam name="T">Type that Specification is being defined for.</typeparam>
+            <param name="expression">Instance of <see cref="!:IRuleBuilder&lt;T, string&gt;"/> that is this method is extending.</param>
+            <param name="min"><see cref="!:Expression&lt;Func&lt;T, int&gt;&gt;"/> that resolves to another property on T that will be used for the min length.</param>
+            <param name="max">Maximum length of the string.</param>
+            <returns><see cref="!:ActionJoinBuilder&lt;T, string&gt;"/></returns>
+        </member>
+        <member name="M:SpecExpress.CoreValidatorExtensions.LengthBetween``1(SpecExpress.DSL.IRuleBuilder{``0,System.String},System.Int32,System.Linq.Expressions.Expression{System.Func{``0,System.Int32}})">
+            <summary>
+            Enforces that a string's length is between a min and max length.
+            </summary>
+            <typeparam name="T">Type that Specification is being defined for.</typeparam>
+            <param name="expression">Instance of <see cref="!:IRuleBuilder&lt;T, string&gt;"/> that is this method is extending.</param>
+            <param name="min">Minimum length of the string.</param>
+            <param name="max"><see cref="!:Expression&lt;Func&lt;T, int&gt;&gt;"/> that resolves to another property on T that will be used for the max length.</param>
+            <returns><see cref="!:ActionJoinBuilder&lt;T, string&gt;"/></returns>
+        </member>
+        <member name="M:SpecExpress.CoreValidatorExtensions.LengthBetween``1(SpecExpress.DSL.IRuleBuilder{``0,System.String},System.Linq.Expressions.Expression{System.Func{``0,System.Int32}},System.Linq.Expressions.Expression{System.Func{``0,System.Int32}})">
+            <summary>
+            Enforces that a string's length is between a min and max length.
+            </summary>
+            <typeparam name="T">Type that Specification is being defined for.</typeparam>
+            <param name="expression">Instance of <see cref="!:IRuleBuilder&lt;T, string&gt;"/> that is this method is extending.</param>
+            <param name="min"><see cref="!:Expression&lt;Func&lt;T, int&gt;&gt;"/> that resolves to another property on T that will be used for the min length.</param>
+            <param name="max"><see cref="!:Expression&lt;Func&lt;T, int&gt;&gt;"/> that resolves to another property on T that will be used for the max length.</param>
+            <returns><see cref="!:ActionJoinBuilder&lt;T, string&gt;"/></returns>
+        </member>
+        <member name="M:SpecExpress.CoreValidatorExtensions.LengthEqualTo``1(SpecExpress.DSL.IRuleBuilder{``0,System.String},System.Int32)">
+            <summary>
+            Enforces that a string's length be equal to a value.
+            </summary>
+            <typeparam name="T">Type that Specification is being defined for.</typeparam>
+            <param name="expression">Instance of <see cref="!:IRuleBuilder&lt;T, string&gt;"/> that is this method is extending.</param>
+            <param name="length">The length that the string must be equal to.</param>
+            <returns><see cref="!:ActionJoinBuilder&lt;T, string&gt;"/></returns>
+        </member>
+        <member name="M:SpecExpress.CoreValidatorExtensions.LengthEqualTo``1(SpecExpress.DSL.IRuleBuilder{``0,System.String},System.Linq.Expressions.Expression{System.Func{``0,System.Int32}})">
+            <summary>
+            Enforces that a string's length be equal to a value.
+            </summary>
+            <typeparam name="T">Type that Specification is being defined for.</typeparam>
+            <param name="expression">Instance of <see cref="!:IRuleBuilder&lt;T, string&gt;"/> that is this method is extending.</param>
+            <param name="length"><see cref="!:Expression&lt;Func&lt;T, int&gt;&gt;"/> that resolves to another property on T that will be used for the string must be equal to.</param>
+            <returns><see cref="!:ActionJoinBuilder&lt;T, string&gt;"/></returns>
+        </member>
+        <member name="M:SpecExpress.CoreValidatorExtensions.MinLength``1(SpecExpress.DSL.IRuleBuilder{``0,System.String},System.Int32)">
+            <summary>
+            Enforces that a string's length must be longer than a value.
+            </summary>
+            <typeparam name="T">Type that Specification is being defined for.</typeparam>
+            <param name="expression">Instance of <see cref="!:IRuleBuilder&lt;T, string&gt;"/> that is this method is extending.</param>
+            <param name="min">Minimum length of the string.</param>
+            <returns><see cref="!:ActionJoinBuilder&lt;T, string&gt;"/></returns>
+        </member>
+        <member name="M:SpecExpress.CoreValidatorExtensions.MinLength``1(SpecExpress.DSL.IRuleBuilder{``0,System.String},System.Linq.Expressions.Expression{System.Func{``0,System.Int32}})">
+            <summary>
+            Enforces that a string's length must be longer than a value.
+            </summary>
+            <typeparam name="T">Type that Specification is being defined for.</typeparam>
+            <param name="expression">Instance of <see cref="!:IRuleBuilder&lt;T, string&gt;"/> that is this method is extending.</param>
+            <param name="min"><see cref="!:Expression&lt;Func&lt;T, int&gt;&gt;"/> that resolves to another property on T that will be used for the minimum length of the string.</param>
+            <returns><see cref="!:ActionJoinBuilder&lt;T, string&gt;"/></returns>
+        </member>
+        <member name="M:SpecExpress.CoreValidatorExtensions.MaxLength``1(SpecExpress.DSL.IRuleBuilder{``0,System.String},System.Int32)">
+            <summary>
+            Enforces that a string's length must be shorter than a value.
+            </summary>
+            <typeparam name="T">Type that Specification is being defined for.</typeparam>
+            <param name="expression">Instance of <see cref="!:IRuleBuilder&lt;T, string&gt;"/> that is this method is extending.</param>
+            <param name="max">Maximum length of the string.</param>
+            <returns><see cref="!:ActionJoinBuilder&lt;T, string&gt;"/></returns>
+        </member>
+        <member name="M:SpecExpress.CoreValidatorExtensions.MaxLength``1(SpecExpress.DSL.IRuleBuilder{``0,System.String},System.Linq.Expressions.Expression{System.Func{``0,System.Int32}})">
+            <summary>
+            Enforces that a string's length must be shorter than a value.
+            </summary>
+            <typeparam name="T">Type that Specification is being defined for.</typeparam>
+            <param name="expression">Instance of <see cref="!:IRuleBuilder&lt;T, string&gt;"/> that is this method is extending.</param>
+            <param name="max"><see cref="!:Expression&lt;Func&lt;T, int&gt;&gt;"/> that resolves to another property on T that will be used for the maximum length of the string.</param>
+            <returns><see cref="!:ActionJoinBuilder&lt;T, string&gt;"/></returns>
+        </member>
+        <member name="M:SpecExpress.CoreValidatorExtensions.Matches``1(SpecExpress.DSL.IRuleBuilder{``0,System.String},System.String)">
+            <summary>
+            Enforces that a string's length must be shorter than a value.
+            </summary>
+            <typeparam name="T">Type that Specification is being defined for.</typeparam>
+            <param name="expression">Instance of <see cref="!:IRuleBuilder&lt;T, string&gt;"/> that is this method is extending.</param>
+            <param name="regexPattern">The regex that the string must match.</param>
+            <returns><see cref="!:ActionJoinBuilder&lt;T, string&gt;"/></returns>
+        </member>
+        <member name="M:SpecExpress.CoreValidatorExtensions.Matches``1(SpecExpress.DSL.IRuleBuilder{``0,System.String},System.Linq.Expressions.Expression{System.Func{``0,System.String}})">
+            <summary>
+            Enforces that a string's length must be shorter than a value.
+            </summary>
+            <typeparam name="T">Type that Specification is being defined for.</typeparam>
+            <param name="expression">Instance of <see cref="!:IRuleBuilder&lt;T, string&gt;"/> that is this method is extending.</param>
+            <param name="regexPattern"><see cref="!:Expression&lt;Func&lt;T, string&gt;&gt;"/> that resolves to another property on T that will be used for the regex that the string must match.</param>
+            <returns><see cref="!:ActionJoinBuilder&lt;T, string&gt;"/></returns>
+        </member>
+        <member name="M:SpecExpress.CoreValidatorExtensions.IsNumeric``1(SpecExpress.DSL.IRuleBuilder{``0,System.String})">
+            <summary>
+            Enforces that a string contains only numeric characters.
+            </summary>
+            <typeparam name="T">Type that Specification is being defined for.</typeparam>
+            <param name="expression">Instance of <see cref="!:IRuleBuilder&lt;T, string&gt;"/> that is this method is extending.</param>
+            <returns><see cref="!:ActionJoinBuilder&lt;T, string&gt;"/></returns>
+        </member>
+        <member name="M:SpecExpress.CoreValidatorExtensions.IsAlpha``1(SpecExpress.DSL.IRuleBuilder{``0,System.String})">
+            <summary>
+            Enforces that a string contains only alpha characters.
+            </summary>
+            <typeparam name="T">Type that Specification is being defined for.</typeparam>
+            <param name="expression">Instance of <see cref="!:IRuleBuilder&lt;T, string&gt;"/> that is this method is extending.</param>
+            <returns><see cref="!:ActionJoinBuilder&lt;T, string&gt;"/></returns>
+        </member>
+        <member name="M:SpecExpress.CoreValidatorExtensions.Contains``2(SpecExpress.DSL.IRuleBuilder{``0,``1},System.Object)">
+            <summary>
+            Enforces that a collection contain an insance of a specific object.
+            </summary>
+            <typeparam name="T">Type that Specification is being defined for.</typeparam>
+            <typeparam name="TProperty">Type of the Collection which must implement IEnumerable.</typeparam>
+            <param name="expression">Instance of <see cref="T:SpecExpress.DSL.IRuleBuilder`2"/> that is this method is extending.</param>
+            <param name="valueToLookFor">The object to look for in the collection.</param>
+            <returns><see cref="T:SpecExpress.DSL.ActionJoinBuilder`2"/></returns>
+        </member>
+        <member name="M:SpecExpress.CoreValidatorExtensions.Contains``2(SpecExpress.DSL.IRuleBuilder{``0,``1},System.Linq.Expressions.Expression{System.Func{``0,System.Object}})">
+            <summary>
+            Enforces that a collection contain an insance of a specific object.
+            </summary>
+            <typeparam name="T">Type that Specification is being defined for.</typeparam>
+            <typeparam name="TProperty">Type of the Collection which must implement IEnumerable.</typeparam>
+            <param name="expression">Instance of <see cref="T:SpecExpress.DSL.IRuleBuilder`2"/> that is this method is extending.</param>
+            <param name="valueToLookFor"><see cref="!:Expression&lt;Func&lt;T, IEnumerable&gt;&gt;"/> that resolves to another property on T that will be used to specify the object to look for in the collection.</param>
+            <returns><see cref="T:SpecExpress.DSL.ActionJoinBuilder`2"/></returns>
+        </member>
+        <member name="M:SpecExpress.CoreValidatorExtensions.ItemsAreUnique``2(SpecExpress.DSL.IRuleBuilder{``0,``1})">
+            <summary>
+            Enforces that items in a collection are unique.
+            </summary>
+            <typeparam name="T">Type that Specification is being defined for.</typeparam>
+            <typeparam name="TProperty">Type of the Collection which must implement IEnumerable.</typeparam>
+            <param name="expression">Instance of <see cref="T:SpecExpress.DSL.IRuleBuilder`2"/> that is this method is extending.</param>
+            <returns><see cref="T:SpecExpress.DSL.ActionJoinBuilder`2"/></returns>
+        </member>
+        <member name="M:SpecExpress.CoreValidatorExtensions.ForEach``2(SpecExpress.DSL.IRuleBuilder{``0,``1},System.Predicate{System.Object},System.String)">
+            <summary>
+            Applies a predicate to each instance in the collection and enforces that the predicate must return true for each instance.
+            </summary>
+            <typeparam name="T">Type that Specification is being defined for.</typeparam>
+            <typeparam name="TProperty">Type of the Collection which must implement IEnumerable.</typeparam>
+            <param name="expression">Instance of <see cref="T:SpecExpress.DSL.IRuleBuilder`2"/> that is this method is extending.</param>
+            <param name="predicate">The Predicate to be applied to each instance in the collection.</param>
+            <param name="messageTemplate">The message to use when the predicate returns false.</param>
+            <returns><see cref="T:SpecExpress.DSL.ActionJoinBuilder`2"/></returns>
+        </member>
+        <member name="M:SpecExpress.CoreValidatorExtensions.IsEmpty``2(SpecExpress.DSL.IRuleBuilder{``0,``1})">
+            <summary>
+            Enforces that the collection is empty.
+            </summary>
+            <typeparam name="T">Type that Specification is being defined for.</typeparam>
+            <typeparam name="TProperty">Type of the Collection which must implement IEnumerable.</typeparam>
+            <param name="expression">Instance of <see cref="T:SpecExpress.DSL.IRuleBuilder`2"/> that is this method is extending.</param>
+            <returns><see cref="T:SpecExpress.DSL.ActionJoinBuilder`2"/></returns>
+        </member>
+        <member name="M:SpecExpress.CoreValidatorExtensions.CountGreaterThan``2(SpecExpress.DSL.IRuleBuilder{``0,``1},System.Int32)">
+            <summary>
+            Enforces that the collection must contain a minimum number of instances.
+            </summary>
+            <typeparam name="T">Type that Specification is being defined for.</typeparam>
+            <typeparam name="TProperty">Type of the Collection which must implement IEnumerable.</typeparam>
+            <param name="expression">Instance of <see cref="T:SpecExpress.DSL.IRuleBuilder`2"/> that is this method is extending.</param>
+            <param name="greaterThan">The minimum number of instances that the collection must contain.</param>
+            <returns><see cref="T:SpecExpress.DSL.ActionJoinBuilder`2"/></returns>
+        </member>
+        <member name="M:SpecExpress.CoreValidatorExtensions.CountGreaterThan``2(SpecExpress.DSL.IRuleBuilder{``0,``1},System.Linq.Expressions.Expression{System.Func{``0,System.Int32}})">
+            <summary>
+            Enforces that the collection must contain a minimum number of instances.
+            </summary>
+            <typeparam name="T">Type that Specification is being defined for.</typeparam>
+            <typeparam name="TProperty">Type of the Collection which must implement IEnumerable.</typeparam>
+            <param name="expression">Instance of <see cref="T:SpecExpress.DSL.IRuleBuilder`2"/> that is this method is extending.</param>
+            <param name="greaterThan"><see cref="!:Expression&lt;Func&lt;T, int&gt;&gt;"/> that resolves to another property on T that will be used for the minimum number of instances that the collection must contain.</param>
+            <returns><see cref="T:SpecExpress.DSL.ActionJoinBuilder`2"/></returns>
+        </member>
+        <member name="M:SpecExpress.CoreValidatorExtensions.CountGreaterThanEqualTo``2(SpecExpress.DSL.IRuleBuilder{``0,``1},System.Int32)">
+            <summary>
+            Enforces that the collection must contain a number of instances greater than or equal to a value.
+            </summary>
+            <typeparam name="T">Type that Specification is being defined for.</typeparam>
+            <typeparam name="TProperty">Type of the Collection which must implement IEnumerable.</typeparam>
+            <param name="expression">Instance of <see cref="T:SpecExpress.DSL.IRuleBuilder`2"/> that is this method is extending.</param>
+            <param name="greaterThanEqualTo">The number of instances that the collection must contain.</param>
+            <returns><see cref="T:SpecExpress.DSL.ActionJoinBuilder`2"/></returns>
+        </member>
+        <member name="M:SpecExpress.CoreValidatorExtensions.CountGreaterThanEqualTo``2(SpecExpress.DSL.IRuleBuilder{``0,``1},System.Linq.Expressions.Expression{System.Func{``0,System.Int32}})">
+            <summary>
+            Enforces that the collection must contain a number of instances greater than or equal to a value.
+            </summary>
+            <typeparam name="T">Type that Specification is being defined for.</typeparam>
+            <typeparam name="TProperty">Type of the Collection which must implement IEnumerable.</typeparam>
+            <param name="expression">Instance of <see cref="T:SpecExpress.DSL.IRuleBuilder`2"/> that is this method is extending.</param>
+            <param name="greaterThanEqualTo"><see cref="!:Expression&lt;Func&lt;T, int&gt;&gt;"/> that resolves to another property on T that will be used for the minimum number of instances that the collection must contain.</param>
+            <returns><see cref="T:SpecExpress.DSL.ActionJoinBuilder`2"/></returns>
+        </member>
+        <member name="M:SpecExpress.CoreValidatorExtensions.CountLessThan``2(SpecExpress.DSL.IRuleBuilder{``0,``1},System.Int32)">
+            <summary>
+            Enforces that the collection must contain a number of instances less than a value.
+            </summary>
+            <typeparam name="T">Type that Specification is being defined for.</typeparam>
+            <typeparam name="TProperty">Type of the Collection which must implement IEnumerable.</typeparam>
+            <param name="expression">Instance of <see cref="T:SpecExpress.DSL.IRuleBuilder`2"/> that is this method is extending.</param>
+            <param name="lessThan">The quantity of instances the collection must contain less than.</param>
+            <returns><see cref="T:SpecExpress.DSL.ActionJoinBuilder`2"/></returns>
+        </member>
+        <member name="M:SpecExpress.CoreValidatorExtensions.CountLessThan``2(SpecExpress.DSL.IRuleBuilder{``0,``1},System.Linq.Expressions.Expression{System.Func{``0,System.Int32}})">
+            <summary>
+            Enforces that the collection must contain a number of instances less than a value.
+            </summary>
+            <typeparam name="T">Type that Specification is being defined for.</typeparam>
+            <typeparam name="TProperty">Type of the Collection which must implement IEnumerable.</typeparam>
+            <param name="expression">Instance of <see cref="T:SpecExpress.DSL.IRuleBuilder`2"/> that is this method is extending.</param>
+            <param name="lessThan"><see cref="!:Expression&lt;Func&lt;T, int&gt;&gt;"/> that resolves to another property on T that will be used for the quantity of instances the collection must contain less than.</param>
+            <returns><see cref="T:SpecExpress.DSL.ActionJoinBuilder`2"/></returns>
+        </member>
+        <member name="M:SpecExpress.CoreValidatorExtensions.CountLessThanEqualTo``2(SpecExpress.DSL.IRuleBuilder{``0,``1},System.Int32)">
+            <summary>
+            Enforces that the collection must contain a number of instances less than or equal to a value.
+            </summary>
+            <typeparam name="T">Type that Specification is being defined for.</typeparam>
+            <typeparam name="TProperty">Type of the Collection which must implement IEnumerable.</typeparam>
+            <param name="expression">Instance of <see cref="T:SpecExpress.DSL.IRuleBuilder`2"/> that is this method is extending.</param>
+            <param name="lessThanEqualTo">The quantity of instances the collection must contain less than or equal to.</param>
+            <returns><see cref="T:SpecExpress.DSL.ActionJoinBuilder`2"/></returns>
+        </member>
+        <member name="M:SpecExpress.CoreValidatorExtensions.CountLessThanEqualTo``2(SpecExpress.DSL.IRuleBuilder{``0,``1},System.Linq.Expressions.Expression{System.Func{``0,System.Int32}})">
+            <summary>
+            Enforces that the collection must contain a number of instances less than or equal to a value.
+            </summary>
+            <typeparam name="T">Type that Specification is being defined for.</typeparam>
+            <typeparam name="TProperty">Type of the Collection which must implement IEnumerable.</typeparam>
+            <param name="expression">Instance of <see cref="T:SpecExpress.DSL.IRuleBuilder`2"/> that is this method is extending.</param>
+            <param name="lessThanEqualTo"><see cref="!:Expression&lt;Func&lt;T, int&gt;&gt;"/> that resolves to another property on T that will be used for the quantity of instances the collection must contain less than or equal to.</param>
+            <returns><see cref="T:SpecExpress.DSL.ActionJoinBuilder`2"/></returns>
+        </member>
+        <member name="M:SpecExpress.CoreValidatorExtensions.CountEqualTo``2(SpecExpress.DSL.IRuleBuilder{``0,``1},System.Int32)">
+            <summary>
+            Enforces that the collectin must conatain an exact number of instances.
+            </summary>
+            <typeparam name="T">Type that Specification is being defined for.</typeparam>
+            <typeparam name="TProperty">Type of the Collection which must implement IEnumerable.</typeparam>
+            <param name="expression">Instance of <see cref="T:SpecExpress.DSL.IRuleBuilder`2"/> that is this method is extending.</param>
+            <param name="equalTo">The number of instances the collection must contain.</param>
+            <returns><see cref="T:SpecExpress.DSL.ActionJoinBuilder`2"/></returns>
+        </member>
+        <member name="M:SpecExpress.CoreValidatorExtensions.CountEqualTo``2(SpecExpress.DSL.IRuleBuilder{``0,``1},System.Linq.Expressions.Expression{System.Func{``0,System.Int32}})">
+            <summary>
+            Enforces that the collection must conatain an exact number of instances.
+            </summary>
+            <typeparam name="T">Type that Specification is being defined for.</typeparam>
+            <typeparam name="TProperty">Type of the Collection which must implement IEnumerable.</typeparam>
+            <param name="expression">Instance of <see cref="T:SpecExpress.DSL.IRuleBuilder`2"/> that is this method is extending.</param>
+            <param name="equalTo"><see cref="!:Expression&lt;Func&lt;T, int&gt;&gt;"/> that resolves to another property on T that will be used for the exact quantity of instances the collection must contain.</param>
+            <returns><see cref="T:SpecExpress.DSL.ActionJoinBuilder`2"/></returns>
+        </member>
+        <member name="M:SpecExpress.CoreValidatorExtensions.GreaterThan``2(SpecExpress.DSL.IRuleBuilder{``0,``1},``1)">
+            <summary>
+            Enforces that a property must be Greater Than a value.
+            </summary>
+            <typeparam name="T">Type that Specification is being defined for.</typeparam>
+            <typeparam name="TProperty">Type of the Property.</typeparam>
+            <param name="expression">Instance of <see cref="T:SpecExpress.DSL.IRuleBuilder`2"/> that is this method is extending.</param>
+            <param name="greaterThan">The value that the property must be greater than.</param>
+            <returns><see cref="T:SpecExpress.DSL.ActionJoinBuilder`2"/></returns>
+        </member>
+        <member name="M:SpecExpress.CoreValidatorExtensions.GreaterThan``2(SpecExpress.DSL.IRuleBuilder{``0,``1},System.Linq.Expressions.Expression{System.Func{``0,``1}})">
+            <summary>
+            Enforces that a property must be Greater Than a value.
+            </summary>
+            <typeparam name="T">Type that Specification is being defined for.</typeparam>
+            <typeparam name="TProperty">Type of the Property.</typeparam>
+            <param name="expression">Instance of <see cref="T:SpecExpress.DSL.IRuleBuilder`2"/> that is this method is extending.</param>
+            <param name="greaterThan"><see cref="!:Expression&lt;Func&lt;T, int&gt;&gt;"/> that resolves to another property on T that will be used for the value that the property must be greater than.</param>
+            <returns><see cref="T:SpecExpress.DSL.ActionJoinBuilder`2"/></returns>
+        </member>
+        <member name="M:SpecExpress.CoreValidatorExtensions.GreaterThanEqualTo``2(SpecExpress.DSL.IRuleBuilder{``0,``1},``1)">
+            <summary>
+            Enforces that a property must be Greater Than or Equal To a value.
+            </summary>
+            <typeparam name="T">Type that Specification is being defined for.</typeparam>
+            <typeparam name="TProperty">Type of the Property.</typeparam>
+            <param name="expression">Instance of <see cref="T:SpecExpress.DSL.IRuleBuilder`2"/> that is this method is extending.</param>
+            <param name="greaterThanEqualTo">The value that the property must be greater than or equal to.</param>
+            <returns><see cref="T:SpecExpress.DSL.ActionJoinBuilder`2"/></returns>
+        </member>
+        <member name="M:SpecExpress.CoreValidatorExtensions.GreaterThanEqualTo``2(SpecExpress.DSL.IRuleBuilder{``0,``1},System.Linq.Expressions.Expression{System.Func{``0,``1}})">
+            <summary>
+            Enforces that a property must be Greater Than or Equal To a value.
+            </summary>
+            <typeparam name="T">Type that Specification is being defined for.</typeparam>
+            <typeparam name="TProperty">Type of the Property.</typeparam>
+            <param name="expression">Instance of <see cref="T:SpecExpress.DSL.IRuleBuilder`2"/> that is this method is extending.</param>
+            <param name="greaterThanEqualTo"><see cref="!:Expression&lt;Func&lt;T, int&gt;&gt;"/> that resolves to another property on T that will be used for the value that the property must be greater than or equal to.</param>
+            <returns><see cref="T:SpecExpress.DSL.ActionJoinBuilder`2"/></returns>
+        </member>
+        <member name="M:SpecExpress.CoreValidatorExtensions.LessThan``2(SpecExpress.DSL.IRuleBuilder{``0,``1},``1)">
+            <summary>
+            Enforces that a property must be Less Than a value.
+            </summary>
+            <typeparam name="T">Type that Specification is being defined for.</typeparam>
+            <typeparam name="TProperty">Type of the Property.</typeparam>
+            <param name="expression">Instance of <see cref="T:SpecExpress.DSL.IRuleBuilder`2"/> that is this method is extending.</param>
+            <param name="lessThan">The value that the property must be less than.</param>
+            <returns><see cref="T:SpecExpress.DSL.ActionJoinBuilder`2"/></returns>
+        </member>
+        <member name="M:SpecExpress.CoreValidatorExtensions.LessThan``2(SpecExpress.DSL.IRuleBuilder{``0,``1},System.Linq.Expressions.Expression{System.Func{``0,``1}})">
+            <summary>
+            Enforces that a property must be Less Than a value.
+            </summary>
+            <typeparam name="T">Type that Specification is being defined for.</typeparam>
+            <typeparam name="TProperty">Type of the Property.</typeparam>
+            <param name="expression">Instance of <see cref="T:SpecExpress.DSL.IRuleBuilder`2"/> that is this method is extending.</param>
+            <param name="lessThan"><see cref="!:Expression&lt;Func&lt;T, int&gt;&gt;"/> that resolves to another property on T that will be used for the value that the property must be less than.</param>
+            <returns><see cref="T:SpecExpress.DSL.ActionJoinBuilder`2"/></returns>
+        </member>
+        <member name="M:SpecExpress.CoreValidatorExtensions.LessThanEqualTo``2(SpecExpress.DSL.IRuleBuilder{``0,``1},``1)">
+            <summary>
+            Enforces that a property must be Less Than or Equal To a value.
+            </summary>
+            <typeparam name="T">Type that Specification is being defined for.</typeparam>
+            <typeparam name="TProperty">Type of the Property.</typeparam>
+            <param name="expression">Instance of <see cref="T:SpecExpress.DSL.IRuleBuilder`2"/> that is this method is extending.</param>
+            <param name="lessThanEqualTo">The value that the property must be less than or equal to.</param>
+            <returns><see cref="T:SpecExpress.DSL.ActionJoinBuilder`2"/></returns>
+        </member>
+        <member name="M:SpecExpress.CoreValidatorExtensions.LessThanEqualTo``2(SpecExpress.DSL.IRuleBuilder{``0,``1},System.Linq.Expressions.Expression{System.Func{``0,``1}})">
+            <summary>
+            Enforces that a property must be Less Than or Equal To a value.
+            </summary>
+            <typeparam name="T">Type that Specification is being defined for.</typeparam>
+            <typeparam name="TProperty">Type of the Property.</typeparam>
+            <param name="expression">Instance of <see cref="T:SpecExpress.DSL.IRuleBuilder`2"/> that is this method is extending.</param>
+            <param name="lessThanEqualTo"><see cref="!:Expression&lt;Func&lt;T, int&gt;&gt;"/> that resolves to another property on T that will be used for the value that the property must be less than or equal to.</param>
+            <returns><see cref="T:SpecExpress.DSL.ActionJoinBuilder`2"/></returns>
+        </member>
+        <member name="M:SpecExpress.CoreValidatorExtensions.EqualTo``2(SpecExpress.DSL.IRuleBuilder{``0,``1},``1)">
+            <summary>
+            Enforces that a property must be Equal To a value.
+            </summary>
+            <typeparam name="T">Type that Specification is being defined for.</typeparam>
+            <typeparam name="TProperty">Type of the Property.</typeparam>
+            <param name="expression">Instance of <see cref="T:SpecExpress.DSL.IRuleBuilder`2"/> that is this method is extending.</param>
+            <param name="equalTo">The value that the property must be equal to.</param>
+            <returns><see cref="T:SpecExpress.DSL.ActionJoinBuilder`2"/></returns>
+        </member>
+        <member name="M:SpecExpress.CoreValidatorExtensions.EqualTo``2(SpecExpress.DSL.IRuleBuilder{``0,``1},System.Linq.Expressions.Expression{System.Func{``0,``1}})">
+            <summary>
+            Enforces that a property must be Equal To a value.
+            </summary>
+            <typeparam name="T">Type that Specification is being defined for.</typeparam>
+            <typeparam name="TProperty">Type of the Property.</typeparam>
+            <param name="expression">Instance of <see cref="T:SpecExpress.DSL.IRuleBuilder`2"/> that is this method is extending.</param>
+            <param name="equalTo"><see cref="!:Expression&lt;Func&lt;T, int&gt;&gt;"/> that resolves to another property on T that will be used for the value that the property must be equal to.</param>
+            <returns><see cref="T:SpecExpress.DSL.ActionJoinBuilder`2"/></returns>
+        </member>
+        <member name="M:SpecExpress.CoreValidatorExtensions.Between``2(SpecExpress.DSL.IRuleBuilder{``0,``1},``1,``1)">
+            <summary>
+            Enforces that a property must be between to values.
+            </summary>
+            <typeparam name="T">Type that Specification is being defined for.</typeparam>
+            <typeparam name="TProperty">Type of the Property.</typeparam>
+            <param name="expression">Instance of <see cref="T:SpecExpress.DSL.IRuleBuilder`2"/> that is this method is extending.</param>
+            <param name="floor">The minimum value that the property must be greater than.</param>
+            <param name="ceiling">The maximum value tha the property must be less than.</param>
+            <returns><see cref="T:SpecExpress.DSL.ActionJoinBuilder`2"/></returns>
+        </member>
+        <member name="M:SpecExpress.CoreValidatorExtensions.Between``2(SpecExpress.DSL.IRuleBuilder{``0,``1},System.Linq.Expressions.Expression{System.Func{``0,``1}},``1)">
+            <summary>
+            Enforces that a property must be between to values.
+            </summary>
+            <typeparam name="T">Type that Specification is being defined for.</typeparam>
+            <typeparam name="TProperty">Type of the Property.</typeparam>
+            <param name="expression">Instance of <see cref="T:SpecExpress.DSL.IRuleBuilder`2"/> that is this method is extending.</param>
+            <param name="floor"><see cref="!:Expression&lt;Func&lt;T, int&gt;&gt;"/> that resolves to another property on T that will be used for the value that the property must be greater than.</param>
+            <param name="ceiling">The maximum value tha the property must be less than.</param>
+            <returns><see cref="T:SpecExpress.DSL.ActionJoinBuilder`2"/></returns>
+        </member>
+        <member name="M:SpecExpress.CoreValidatorExtensions.Between``2(SpecExpress.DSL.IRuleBuilder{``0,``1},``1,System.Linq.Expressions.Expression{System.Func{``0,``1}})">
+            <summary>
+            Enforces that a property must be between to values.
+            </summary>
+            <typeparam name="T">Type that Specification is being defined for.</typeparam>
+            <typeparam name="TProperty">Type of the Property.</typeparam>
+            <param name="expression">Instance of <see cref="T:SpecExpress.DSL.IRuleBuilder`2"/> that is this method is extending.</param>
+            <param name="floor">The minimum value that the property must be greater than.</param>
+            <param name="ceiling"><see cref="!:Expression&lt;Func&lt;T, int&gt;&gt;"/> that resolves to another property on T that will be used for the value that the property must be less than.</param>
+            <returns><see cref="T:SpecExpress.DSL.ActionJoinBuilder`2"/></returns>
+        </member>
+        <member name="M:SpecExpress.CoreValidatorExtensions.Between``2(SpecExpress.DSL.IRuleBuilder{``0,``1},System.Linq.Expressions.Expression{System.Func{``0,``1}},System.Linq.Expressions.Expression{System.Func{``0,``1}})">
+            <summary>
+            Enforces that a property must be between to values.
+            </summary>
+            <typeparam name="T">Type that Specification is being defined for.</typeparam>
+            <typeparam name="TProperty">Type of the Property.</typeparam>
+            <param name="expression">Instance of <see cref="T:SpecExpress.DSL.IRuleBuilder`2"/> that is this method is extending.</param>
+            <param name="floor"><see cref="!:Expression&lt;Func&lt;T, int&gt;&gt;"/> that resolves to another property on T that will be used for the value that the property must be greater than.</param>
+            <param name="ceiling"><see cref="!:Expression&lt;Func&lt;T, int&gt;&gt;"/> that resolves to another property on T that will be used for the value that the property must be less than.</param>
+            <returns><see cref="T:SpecExpress.DSL.ActionJoinBuilder`2"/></returns>
+        </member>
+        <member name="M:SpecExpress.CoreValidatorExtensions.IsTrue``1(SpecExpress.DSL.IRuleBuilder{``0,System.Boolean})">
+            <summary>
+            Enforces that a property must be true.
+            </summary>
+            <typeparam name="T">Type that Specification is being defined for.</typeparam>
+            <param name="expression">Instance of <see cref="!:IRuleBuilder&lt;T, bool&gt;"/> that is this method is extending.</param>
+            <returns><see cref="!:ActionJoinBuilder&lt;T, bool&gt;"/></returns>
+        </member>
+        <member name="M:SpecExpress.CoreValidatorExtensions.IsFalse``1(SpecExpress.DSL.IRuleBuilder{``0,System.Boolean})">
+            <summary>
+            Enforces that a property must be false.
+            </summary>
+            <typeparam name="T">Type that Specification is being defined for.</typeparam>
+            <param name="expression">Instance of <see cref="!:IRuleBuilder&lt;T, bool&gt;"/> that is this method is extending.</param>
+            <returns><see cref="!:ActionJoinBuilder&lt;T, bool&gt;"/></returns>
+        </member>
+        <member name="M:SpecExpress.CoreValidatorExtensions.Expect``2(SpecExpress.DSL.IRuleBuilder{``0,``1},System.Func{``0,``1,System.Boolean},System.String)">
+            <summary>
+            Allows the definition of a customized rule that may enforce more complex business rules.
+            </summary>
+            <typeparam name="T">Type that Specification is being defined for.</typeparam>
+            <typeparam name="TProperty">Type of the Property.</typeparam>
+            <param name="expression">Instance of <see cref="T:SpecExpress.DSL.IRuleBuilder`2"/> that is this method is extending.</param>
+            <param name="rule">A <see cref="!:Func&lt;T, TProperty, bool&gt;"/> that is executed when the validation takes place.</param>
+            <param name="message">A message that is used when the rule is not valid.</param>
+            <returns><see cref="T:SpecExpress.DSL.ActionJoinBuilder`2"/></returns>
+        </member>
+        <member name="M:SpecExpress.CoreValidatorExtensions.IsInSet``2(SpecExpress.DSL.IRuleBuilder{``0,``1},System.Collections.Generic.IEnumerable{``1})">
+            <summary>
+            Enforces that the value of a property is in a set of valid values.
+            </summary>
+            <typeparam name="T">Type that Specification is being defined for.</typeparam>
+            <typeparam name="TProperty">Type of the Property.</typeparam>
+            <param name="expression">Instance of <see cref="T:SpecExpress.DSL.IRuleBuilder`2"/> that is this method is extending.</param>
+            <param name="set">Instance of <see cref="T:System.Collections.Generic.IEnumerable`1"/> that defines the set of valid values.</param>
+            <returns><see cref="T:SpecExpress.DSL.ActionJoinBuilder`2"/></returns>
+        </member>
+        <member name="M:SpecExpress.CoreValidatorExtensions.IsInSet``2(SpecExpress.DSL.IRuleBuilder{``0,``1},System.Func{``0,System.Collections.Generic.IEnumerable{``1}})">
+            <summary>
+            Enforces that the value of a property is in a set of valid values.
+            </summary>
+            <typeparam name="T">Type that Specification is being defined for.</typeparam>
+            <typeparam name="TProperty">Type of the Property.</typeparam>
+            <param name="expression">Instance of <see cref="T:SpecExpress.DSL.IRuleBuilder`2"/> that is this method is extending.</param>
+            <param name="set"><see cref="!:Expression&lt;Func&lt;T, int&gt;&gt;"/> that resolves to another property on T that will be used for the instance of <see cref="T:System.Collections.Generic.IEnumerable`1"/> that defines the set of valid values.</param>
+            <returns><see cref="T:SpecExpress.DSL.ActionJoinBuilder`2"/></returns>
+        </member>
+        <member name="T:SpecExpress.DSL.WithRuleBuilder`2">
+            <summary>
+            Facilitates the ability to stipulate additional options for a rule.
+            </summary>
+            <typeparam name="T">Type of entity being validated.</typeparam>
+            <typeparam name="TProperty">Type of property on the entity being validated.</typeparam>
+        </member>
+        <member name="M:SpecExpress.DSL.WithRuleBuilder`2.#ctor(SpecExpress.PropertyValidator{`0,`1})">
+            <summary>
+            Initializes a new instance of <see cref="T:SpecExpress.DSL.WithRuleBuilder`2"/>
+            </summary>
+            <param name="propertyValidator">The <see cref="T:SpecExpress.PropertyValidator`2"/> that is being build by the DSL.</param>
+        </member>
+        <!-- Badly formed XML comment ignored for member "M:SpecExpress.DSL.WithRuleBuilder`2.With(System.Action{SpecExpress.DSL.WithBuilder{`0,`1}})" -->
+        <member name="T:SpecExpress.DSL.ActionOptionConditionBuilder`2">
+            <summary>
+            Facilitates the ability to place a condition on a property rule.
+            </summary>
+            <example>
+            Check(c => c.LastName).Required().If(c => c.ContactType == ContactType.Primary)
+            </example>
+            <typeparam name="T">Type of entity being validated.</typeparam>
+            <typeparam name="TProperty">Type of property on the entity being validated.</typeparam>
+        </member>
+        <member name="M:SpecExpress.DSL.ActionOptionConditionBuilder`2.#ctor(SpecExpress.PropertyValidator{`0,`1})">
+            <summary>
+            Initializes a new instance of the <see cref="!:ActionOptionConditionBuilder&gt;T, TProperty&lt;"/> class.
+            </summary>
+            <param name="propertyValidator">The <see cref="T:SpecExpress.PropertyValidator`2"/> that is being build by the DSL.</param>
+        </member>
+        <member name="M:SpecExpress.DSL.ActionOptionConditionBuilder`2.If(System.Linq.Expressions.Expression{System.Predicate{`0}})">
+            <summary>
+            Defines the condition on which must be met before any defined rules for the property are
+            enforced.
+            </summary>
+            <param name="conditionalExpression">An <see cref="!:Expression&lt;Predicate&lt;T&gt;&gt;&gt;"/> that will determine when the rules should be enforced.</param>
+            <returns><see cref="T:SpecExpress.DSL.ActionOptionBuilder`2"/></returns>
+        </member>
+        <member name="T:SpecExpress.ValidationCatalog`1">
+            <summary>
+            Validate an object using a ValidationContext
+            </summary>
+            <typeparam name="TContext"></typeparam>
+        </member>
+        <member name="M:SpecExpress.ValidationCatalog.AddSpecification``1(System.Action{SpecExpress.Validates{``0}})">
+            <summary>
+            Add Specifications dynamically without a SpecificationBase
+            </summary>
+            <typeparam name="TEntity"></typeparam>
+            <param name="rules"></param>
+        </member>
+        <member name="M:SpecExpress.ValidationCatalog.Scan(System.Action{SpecExpress.SpecificationScanner})">
+            <summary>
+            Configure the scanning of Assemblies containing Specifications used by Validate(object)
+            </summary>
+            <param name="configuration"></param>
+        </member>
+        <member name="M:SpecExpress.ValidationCatalog.Validate(System.Object)">
+            <summary>
+            Evaluate an object against it's matching Specification and returns any broken rules.
+            </summary>
+            <param name="instance"></param>
+            <returns></returns>
+        </member>
+        <member name="M:SpecExpress.Rules.GeneralValidators.ForEachSpecificationRule`3.#ctor(SpecExpress.Validates{`2})">
+            <summary>
+            Validate using designated specification
+            </summary>
+            <param name="specification"></param>
+        </member>
+        <member name="M:SpecExpress.Rules.GeneralValidators.ForEachSpecificationRule`3.#ctor">
+            <summary>
+            Validation Property with default Specification from Registry
+            </summary>
+        </member>
+        <member name="M:SpecExpress.Rules.GeneralValidators.ForEachSpecificationRuleUntyped`2.#ctor">
+            <summary>
+            Validation Property with default Specification from Registry
+            </summary>
+        </member>
+        <member name="T:SpecExpress.MessageStore.RuleErrorMessages">
+            <summary>
+              A strongly-typed resource class, for looking up localized strings, etc.
+            </summary>
+        </member>
+        <member name="P:SpecExpress.MessageStore.RuleErrorMessages.ResourceManager">
+            <summary>
+              Returns the cached ResourceManager instance used by this class.
+            </summary>
+        </member>
+        <member name="P:SpecExpress.MessageStore.RuleErrorMessages.Culture">
+            <summary>
+              Overrides the current thread's CurrentUICulture property for all
+              resource lookups using this strongly typed resource class.
+            </summary>
+        </member>
+        <member name="P:SpecExpress.MessageStore.RuleErrorMessages.Alpha">
+            <summary>
+              Looks up a localized string similar to {PropertyName} should only contain letters..
+            </summary>
+        </member>
+        <member name="P:SpecExpress.MessageStore.RuleErrorMessages.Between">
+            <summary>
+              Looks up a localized string similar to {PropertyName} must be between {0} and {1}..
+            </summary>
+        </member>
+        <member name="P:SpecExpress.MessageStore.RuleErrorMessages.Contains">
+            <summary>
+              Looks up a localized string similar to {PropertyName} does not contain {PropertyValue}..
+            </summary>
+        </member>
+        <member name="P:SpecExpress.MessageStore.RuleErrorMessages.CountEqualTo">
+            <summary>
+              Looks up a localized string similar to {PropertyName} should contain {0} items..
+            </summary>
+        </member>
+        <member name="P:SpecExpress.MessageStore.RuleErrorMessages.CountGreaterThan">
+            <summary>
+              Looks up a localized string similar to {PropertyName} should contain greater than {0} items..
+            </summary>
+        </member>
+        <member name="P:SpecExpress.MessageStore.RuleErrorMessages.CountGreaterThanEqualTo">
+            <summary>
+              Looks up a localized string similar to {PropertyName} should contain greater than or equal to  {0} items..
+            </summary>
+        </member>
+        <member name="P:SpecExpress.MessageStore.RuleErrorMessages.CountLessThan">
+            <summary>
+              Looks up a localized string similar to {PropertyName} should contain less than {0} items..
+            </summary>
+        </member>
+        <member name="P:SpecExpress.MessageStore.RuleErrorMessages.CountLessThanEqualTo">
+            <summary>
+              Looks up a localized string similar to {PropertyName} should contain less or equal to {0} items..
+            </summary>
+        </member>
+        <member name="P:SpecExpress.MessageStore.RuleErrorMessages.EqualTo">
+            <summary>
+              Looks up a localized string similar to {PropertyName} must equal {0}..
+            </summary>
+        </member>
+        <member name="P:SpecExpress.MessageStore.RuleErrorMessages.GreaterThan">
+            <summary>
+              Looks up a localized string similar to {PropertyName} must be greater than {0}..
+            </summary>
+        </member>
+        <member name="P:SpecExpress.MessageStore.RuleErrorMessages.GreaterThanEqualTo">
+            <summary>
+              Looks up a localized string similar to {PropertyName} must be greater than or equal to {0}..
+            </summary>
+        </member>
+        <member name="P:SpecExpress.MessageStore.RuleErrorMessages.IsEmpty">
+            <summary>
+              Looks up a localized string similar to {PropertyName} must be empty..
+            </summary>
+        </member>
+        <member name="P:SpecExpress.MessageStore.RuleErrorMessages.IsFalse">
+            <summary>
+              Looks up a localized string similar to {PropertyName} must be false..
+            </summary>
+        </member>
+        <member name="P:SpecExpress.MessageStore.RuleErrorMessages.IsInFuture">
+            <summary>
+              Looks up a localized string similar to {PropertyName} must be in the future..
+            </summary>
+        </member>
+        <member name="P:SpecExpress.MessageStore.RuleErrorMessages.IsInPast">
+            <summary>
+              Looks up a localized string similar to {PropertyName} must be in the past..
+            </summary>
+        </member>
+        <member name="P:SpecExpress.MessageStore.RuleErrorMessages.IsInSet">
+            <summary>
+              Looks up a localized string similar to {PropertyName} is not a valid value..
+            </summary>
+        </member>
+        <member name="P:SpecExpress.MessageStore.RuleErrorMessages.IsTrue">
+            <summary>
+              Looks up a localized string similar to {PropertyName} must be true..
+            </summary>
+        </member>
+        <member name="P:SpecExpress.MessageStore.RuleErrorMessages.ItemsAreUnique">
+            <summary>
+              Looks up a localized string similar to {PropertyName} should be unique.  The duplicates of the following: {0}.
+            </summary>
+        </member>
+        <member name="P:SpecExpress.MessageStore.RuleErrorMessages.LengthBetween">
+            <summary>
+              Looks up a localized string similar to {PropertyName} must be between {0} and {1} characters..
+            </summary>
+        </member>
+        <member name="P:SpecExpress.MessageStore.RuleErrorMessages.LengthEqualTo">
+            <summary>
+              Looks up a localized string similar to {PropertyName} must be {0} character(s)..
+            </summary>
+        </member>
+        <member name="P:SpecExpress.MessageStore.RuleErrorMessages.LessThan">
+            <summary>
+              Looks up a localized string similar to {PropertyName} must be less than {0}..
+            </summary>
+        </member>
+        <member name="P:SpecExpress.MessageStore.RuleErrorMessages.LessThanEqualTo">
+            <summary>
+              Looks up a localized string similar to {PropertyName} must be less than or equal to {0}..
+            </summary>
+        </member>
+        <member name="P:SpecExpress.MessageStore.RuleErrorMessages.Matches">
+            <summary>
+              Looks up a localized string similar to The value in {PropertyName} does not meet the pattern of &apos;{0}&apos;..
+            </summary>
+        </member>
+        <member name="P:SpecExpress.MessageStore.RuleErrorMessages.MaxLength">
+            <summary>
+              Looks up a localized string similar to {PropertyName} must be less than {0} characters..
+            </summary>
+        </member>
+        <member name="P:SpecExpress.MessageStore.RuleErrorMessages.MinLength">
+            <summary>
+              Looks up a localized string similar to {PropertyName} must be greater than {0} characters..
+            </summary>
+        </member>
+        <member name="P:SpecExpress.MessageStore.RuleErrorMessages.Not_Alpha">
+            <summary>
+              Looks up a localized string similar to {PropertyName} should not contain letters..
+            </summary>
+        </member>
+        <member name="P:SpecExpress.MessageStore.RuleErrorMessages.Not_Between">
+            <summary>
+              Looks up a localized string similar to {PropertyName} must not be between {0} and {1}..
+            </summary>
+        </member>
+        <member name="P:SpecExpress.MessageStore.RuleErrorMessages.Not_Contains">
+            <summary>
+              Looks up a localized string similar to {PropertyName} contains {PropertyValue}..
+            </summary>
+        </member>
+        <member name="P:SpecExpress.MessageStore.RuleErrorMessages.Not_CountEqualTo">
+            <summary>
+              Looks up a localized string similar to {PropertyName} should not contain {0} items..
+            </summary>
+        </member>
+        <member name="P:SpecExpress.MessageStore.RuleErrorMessages.Not_CountGreaterThan">
+            <summary>
+              Looks up a localized string similar to {PropertyName} should not contain greater than {0} items..
+            </summary>
+        </member>
+        <member name="P:SpecExpress.MessageStore.RuleErrorMessages.Not_CountGreaterThanEqualTo">
+            <summary>
+              Looks up a localized string similar to {PropertyName} should not contain greater than or equal to {0} items..
+            </summary>
+        </member>
+        <member name="P:SpecExpress.MessageStore.RuleErrorMessages.Not_CountLessThan">
+            <summary>
+              Looks up a localized string similar to {PropertyName} should not contain less than {0} items..
+            </summary>
+        </member>
+        <member name="P:SpecExpress.MessageStore.RuleErrorMessages.Not_CountLessThanEqualTo">
+            <summary>
+              Looks up a localized string similar to {PropertyName} should not contain less or equal to {0} items..
+            </summary>
+        </member>
+        <member name="P:SpecExpress.MessageStore.RuleErrorMessages.Not_EqualTo">
+            <summary>
+              Looks up a localized string similar to {PropertyName} must not equal {0}.  You entered {PropertyValue}..
+            </summary>
+        </member>
+        <member name="P:SpecExpress.MessageStore.RuleErrorMessages.Not_GreaterThan">
+            <summary>
+              Looks up a localized string similar to {PropertyName} must not be greater than {0}..
+            </summary>
+        </member>
+        <member name="P:SpecExpress.MessageStore.RuleErrorMessages.Not_GreaterThanEqualTo">
+            <summary>
+              Looks up a localized string similar to {PropertyName} must not be greater than or equal to {0}..
+            </summary>
+        </member>
+        <member name="P:SpecExpress.MessageStore.RuleErrorMessages.Not_IsEmpty">
+            <summary>
+              Looks up a localized string similar to {PropertyName} must not be empty..
+            </summary>
+        </member>
+        <member name="P:SpecExpress.MessageStore.RuleErrorMessages.Not_IsFalse">
+            <summary>
+              Looks up a localized string similar to {PropertyName} must not be false..
+            </summary>
+        </member>
+        <member name="P:SpecExpress.MessageStore.RuleErrorMessages.Not_IsInFuture">
+            <summary>
+              Looks up a localized string similar to {PropertyName} must not be in the future. .
+            </summary>
+        </member>
+        <member name="P:SpecExpress.MessageStore.RuleErrorMessages.Not_IsInPast">
+            <summary>
+              Looks up a localized string similar to {PropertyName} must not be in the past..
+            </summary>
+        </member>
+        <member name="P:SpecExpress.MessageStore.RuleErrorMessages.Not_IsInSet">
+            <summary>
+              Looks up a localized string similar to {PropertyName} is not a valid value..
+            </summary>
+        </member>
+        <member name="P:SpecExpress.MessageStore.RuleErrorMessages.Not_IsTrue">
+            <summary>
+              Looks up a localized string similar to {PropertyName} must not be true..
+            </summary>
+        </member>
+        <member name="P:SpecExpress.MessageStore.RuleErrorMessages.Not_ItemsAreUnique">
+            <summary>
+              Looks up a localized string similar to {PropertyName} should not be unique..
+            </summary>
+        </member>
+        <member name="P:SpecExpress.MessageStore.RuleErrorMessages.Not_LengthBetween">
+            <summary>
+              Looks up a localized string similar to {PropertyName} must not be between {0} and {1} characters..
+            </summary>
+        </member>
+        <member name="P:SpecExpress.MessageStore.RuleErrorMessages.Not_LengthEqualTo">
+            <summary>
+              Looks up a localized string similar to {PropertyName} should not be {0} characters..
+            </summary>
+        </member>
+        <member name="P:SpecExpress.MessageStore.RuleErrorMessages.Not_LessThan">
+            <summary>
+              Looks up a localized string similar to {PropertyName} must not be less than {0}..
+            </summary>
+        </member>
+        <member name="P:SpecExpress.MessageStore.RuleErrorMessages.Not_LessThanEqualTo">
+            <summary>
+              Looks up a localized string similar to {PropertyName} must not be less than or equal to {0}..
+            </summary>
+        </member>
+        <member name="P:SpecExpress.MessageStore.RuleErrorMessages.Not_Matches">
+            <summary>
+              Looks up a localized string similar to The value in {PropertyName} must not meet the pattern of &apos;{0}&apos;..
+            </summary>
+        </member>
+        <member name="P:SpecExpress.MessageStore.RuleErrorMessages.Not_MaxLength">
+            <summary>
+              Looks up a localized string similar to {PropertyName} must not be less than {0} characters..
+            </summary>
+        </member>
+        <member name="P:SpecExpress.MessageStore.RuleErrorMessages.Not_MinLength">
+            <summary>
+              Looks up a localized string similar to {PropertyName} must not be greater than {0} characters..
+            </summary>
+        </member>
+        <member name="P:SpecExpress.MessageStore.RuleErrorMessages.Not_Numeric">
+            <summary>
+              Looks up a localized string similar to {PropertyName} should not contain numbers..
+            </summary>
+        </member>
+        <member name="P:SpecExpress.MessageStore.RuleErrorMessages.Numeric">
+            <summary>
+              Looks up a localized string similar to {PropertyName} should only contain numbers..
+            </summary>
+        </member>
+        <member name="P:SpecExpress.MessageStore.RuleErrorMessages.Required">
+            <summary>
+              Looks up a localized string similar to {PropertyName} is required..
+            </summary>
+        </member>
+        <member name="P:SpecExpress.MessageStore.RuleErrorMessages.SpecificationRule">
+            <summary>
+              Looks up a localized string similar to {PropertyName} is invalid..
+            </summary>
+        </member>
+    </members>
+</doc>
